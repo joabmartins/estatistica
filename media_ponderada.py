@@ -19,6 +19,10 @@ weights_c = [1] * len(sensor_c_data)  # Cria uma lista de 1s do tamanho de senso
 
 # Combinar todos os pesos na mesma ordem dos dados
 all_weights = weights_a + weights_b + weights_c
+print("all data")
+print(all_data)
+print("all weitghts")
+print(all_weights)
 
 # --- Cálculo da Média Ponderada ---
 
@@ -72,17 +76,17 @@ sample_proportion_occasional = len(occasional_users_satisfaction) / len(all_sati
 
 # Calcular os pesos de correção para cada grupo
 # Peso = (Proporção na População) / (Proporção na Amostra)
-weight_active_group = population_proportion_active / sample_proportion_active
-weight_occasional_group = population_proportion_occasional / sample_proportion_occasional
+weight_active_group = population_proportion_active / sample_proportion_active # 1.1666666666666667
+weight_occasional_group = population_proportion_occasional / sample_proportion_occasional # 0.7499999999999999
 
 # Criar a lista de pesos individuais para cada dado na amostra
 # Cada nota de um usuário ativo terá o peso 'weight_active_group'
-weights_for_active_users = [weight_active_group] * len(active_users_satisfaction)
+weights_for_active_users = [weight_active_group] * len(active_users_satisfaction) # [1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16]
 # Cada nota de um usuário ocasional terá o peso 'weight_occasional_group'
-weights_for_occasional_users = [weight_occasional_group] * len(occasional_users_satisfaction)
+weights_for_occasional_users = [weight_occasional_group] * len(occasional_users_satisfaction) # [0.74, 0.74, 0.74, 0.74, 0.74, 0.74, 0.74, 0.74, 0.74, 0.74]
 
 # Combinar todos os pesos em uma única lista na mesma ordem dos dados
-all_satisfaction_weights = weights_for_active_users + weights_for_occasional_users
+all_satisfaction_weights = weights_for_active_users + weights_for_occasional_users # [1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 1.16, 0.74, 0.74, 0.74, 0.74, 0.74, 0.74, 0.74, 0.74, 0.74, 0.74]
 
 # --- Cálculo da Média Ponderada ---
 
