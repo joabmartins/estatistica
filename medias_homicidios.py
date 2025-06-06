@@ -5,6 +5,8 @@ from scipy.stats import trim_mean
 import numpy as np
 
 def getMedias(estado): 
+     # print(estado.sort_values(by='Population'))
+     # print(estado.sort_values(by='Murder rate'))
 
      media_pop = estado['Population'].mean()
      print(f'media: {media_pop}')
@@ -23,29 +25,6 @@ def getMedias(estado):
         'Population': [media_pop, media_aparada_pop, mediana_pop, np.nan],
         'Murder rate': [media_murd, media_aparada_murd, mediana_murd, media_ponderada]
      }, index=['Média', 'Média Aparada', 'Mediana', 'Media Ponderada'])
-
-     '''
-     estado.loc['Média'] = [
-          np.nan,
-          media_pop,
-          media_murd
-     ]
-     estado.loc['Média Aparada'] = [
-          np.nan,
-          media_aparada_pop,
-          media_aparada_murd
-     ]
-     estado.loc['Mediana'] = [
-          np.nan,
-          mediana_pop,
-          mediana_murd
-     ]
-     print(estado.to_string())
-     '''
-     # Concatena o DataFrame original com o DataFrame de estatísticas
-     # axis=0 significa concatenar por linhas
-     # ignore_index=False para manter os rótulos 'Média', 'Média Aparada', 'Mediana'
-     # df_concat = pd.concat([estado, df_medias], axis=0)
      
      return df_medias
 
