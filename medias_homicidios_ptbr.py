@@ -135,6 +135,34 @@ def estimativas_variabilidade(dados_brutos, media):
    print(df_amplitudes.round(2))
    print("\n")
 
-
 estimativas_variabilidade(df_dados_brutos['Taxa homicidios'], np.mean(df_dados_brutos['Taxa homicidios']))
    
+def frequencias(df_dados_brutos):
+   """
+   A função frequencias tem como objetivo principal categorizar a coluna 'Populacao' de um DataFrame de entrada (df_dados_brutos) 
+   em 10 segmentos (intervalos de população) e, em seguida, gerar uma tabela de frequência que mostra 
+   quantos registros (cidades/estados) caem em cada intervalo, listando também as cidades que pertencem a cada intervalo.
+   """
+   print(frequencias.__doc__)
+   # criar serie que mapeia os valores em (10) seguimentos
+   numero_classes_k = 10
+   classes_populacao = pd.cut(df_dados_brutos['Populacao'], numero_classes_k)
+   # conta quantas ocorrências acontecem em cada intervalo
+   print(classes_populacao.value_counts)
+   classes_populacao.name = 'classes_populacao'
+   # concat: concatena dois dataframes
+   # axis: onde a concatenação irá ocorrer(horiz, vertic)
+   df_dist_frequencia = pd.concat([df_dados_brutos, classes_populacao], axis=1)
+   print(df_dados_brutos)
+   df_dist_frequencia = df_dist_frequencia.sort_values(by='Populacao')
+   groups = []
+   # groupby: agrupa o dataframe com base nos valores únicos da coluna classes_populacao
+   for group, subset in df_dist_frequencia.groupby(by='classes_populacao', observed=False):
+      groups.append({
+         'Classes': group,
+         'Frequência absoluta': len(subset),
+         'Cidades': ','.join(subset.Cidade)
+      })
+   print(pd.DataFrame(groups))
+
+frequencias(df_dados_brutos)
