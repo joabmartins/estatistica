@@ -23,8 +23,6 @@ import pandas as pd
 from scipy.stats import trim_mean
 import numpy as np
 import distribuicao_frequencias
-# pip install matplotlib
-import matplotlib.pylab as plt
 
 # imprimir o docstring
 print(distribuicao_frequencias.__doc__) # Imprime a docstring da função
@@ -112,18 +110,3 @@ for group, subset in df_dist_frequencia.groupby(by='classes', observed=False):
    })
 df_tabela_dist_freq =  pd.DataFrame(groups)
 print(df_tabela_dist_freq.to_string(index=False))
-
-'''
-histograma = (df_dados_brutos['Populacao'] / 1_000_000).plot.hist(figsize=(4, 4))
-histograma.set_xlabel('População (milhões)')
-histograma.set_ylabel('Frequência (Número de Cidades)')
-plt.tight_layout()
-plt.show()
-'''
-bins_do_grafico = [1.387, 4.7, 8.0, 11.3]
-# histograma = (df_dados_brutos['Taxa homicidios']).plot.hist(figsize=(4, 4))
-histograma = (df_dados_brutos['Taxa homicidios']).plot.hist(figsize=(6, 4), bins=bins_do_grafico)
-histograma.set_xlabel('Taxa de Homicídios')
-histograma.set_ylabel('Frequência (Número de Cidades)')
-plt.tight_layout()
-plt.show()

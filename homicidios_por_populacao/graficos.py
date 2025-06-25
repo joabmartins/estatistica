@@ -1,0 +1,55 @@
+"""
+Histograma:
+     Gráfico de barras que representa uma distribuição de frequência.
+     - Eixo x (horiz): intervalos (classes) dos dados
+     - Eixo y (vertc): frequência (contagem) de itens por intervalo
+BoxPlot: 
+     Diagrama de caixa que representa os extremos e mais os quartis
+     - Min: O menor valor do conjunto de dados
+     - Q1: Primeiro quartil dos dados (25%)
+     - Q2: Segundo quartil dos dados, a mediana (50%)
+     - Q3: Terceiro quartil dos dados (75%)
+     - Max: O maior valor do conjunto de dados
+
+"""
+# pip install matplotlib
+import matplotlib.pylab as plt
+import graficos
+import pandas as pd
+
+# imprimir o docstring
+print(graficos.__doc__) # Imprime a docstring da função
+
+# importar os dados do csv
+df_dados_brutos = pd.read_csv('homicidios_por_populacao/taxa_homicidios.csv')
+
+def histograma():
+     bins_do_grafico = [1.387, 4.7, 8.0, 11.3]
+     histograma = (df_dados_brutos['Taxa homicidios']).plot.hist(figsize=(6, 4), bins=bins_do_grafico)
+     histograma.set_xlabel('Taxa de Homicídios')
+     histograma.set_ylabel('Frequência (Número de Cidades)')
+     # plt.tight_layout()
+     plt.show()
+
+def boxplot():
+     #ax = (df_dados_brutos['Populacao']/1_000_000).plot.box()
+     #ax.set_ylabel('Populacao (milhoes)')
+     ax = (df_dados_brutos['Taxa homicidios']).plot.box()
+     ax.set_ylabel('Taxa de homicídios')
+     # plt.tight_layout()
+     plt.show()
+
+def densidade():
+     # 'Taxa Homicidios' (ordenados): 1.4, 2.6, 4.2, 4.6, 6.8, 7.3, 9.4, 9.5, 14.0, 14.6
+     print(df_dados_brutos.sort_values(by=['Taxa homicidios']))
+     histograma = (df_dados_brutos['Taxa homicidios']).plot.hist(density = True, bins = range(1, 16), figsize=(6, 4))
+     df_dados_brutos['Taxa homicidios'].plot.density(ax = histograma)
+     histograma.set_xlabel('Taxa de Homicídios')
+     histograma.set_ylabel('Frequência (densidade)')
+     plt.xlim(0, 15)
+     # plt.tight_layout()
+     plt.show()
+
+histograma()
+# boxplot()
+# densidade()
