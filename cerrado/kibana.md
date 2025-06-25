@@ -1,3 +1,5 @@
+https://www.kaggle.com/datasets
+
 # Docker
 1. Inicie o Docker Desktop e suba apenas o elasticsearch e o kibana.
 2. Acesse localhost:9200 e localhost:9200/_cat/indices para verificar se o elasticsearch está funcionando corretamente.
