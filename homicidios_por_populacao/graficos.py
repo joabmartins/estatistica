@@ -10,6 +10,10 @@ BoxPlot:
      - Q2: Segundo quartil dos dados, a mediana (50%)
      - Q3: Terceiro quartil dos dados (75%)
      - Max: O maior valor do conjunto de dados
+Densidade:
+     Gráfico que representa uma distribuição suavisada da frequência dos dados
+     - Eixo x (horiz): intervalos (classes) dos dados
+     - Eixo y (vertc): frequência (contagem) de itens por intervalo
 
 """
 # pip install matplotlib
@@ -50,6 +54,21 @@ def densidade():
      # plt.tight_layout()
      plt.show()
 
-histograma()
+def dispersao():
+     # Criar o gráfico de dispersão, alpha é a tranparência dos pontos
+     plt.figure(figsize=(10, 6)) # Define o tamanho da figura
+     plt.scatter(df_dados_brutos['Populacao'], df_dados_brutos['Taxa homicidios'], alpha=0.7) 
+
+     # Adicionar rótulos e título
+     plt.xlabel('População')
+     plt.ylabel('Taxa de Homicídios')
+     plt.title('Gráfico de Dispersão: Taxa de Homicídios vs. População')
+     plt.grid(True) # Adiciona uma grade ao gráfico
+
+# Mostrar o gráfico
+plt.show()
+
+# histograma()
 # boxplot()
 # densidade()
+dispersao()

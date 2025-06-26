@@ -101,3 +101,31 @@ Add Metric (não usa a que já tem)
      Field: num_focos
      Custom label: focos
 
+gráficos:
+Line
+Título: Focos de Incêndios ao longo dos anos
+Metric (Y-axis)
+     Aggregation: Sum
+     Field: num_focos
+     Label: Número de focos
+Bucket (X-axis)
+     Aggregation: Terms
+     Field: Ano
+     Order by: Alphabetical
+     Order: Ascending
+     Size: 30
+     Label: Anos
+
+Horizontal Bar
+Título: Ranking de anos por número de focos
+Metric (Y-axis)
+     Aggregation: Max
+     Field: num_focos
+     Label: Número de focos
+Bucket (X-axis)
+     Aggregation: Terms
+     Field: Ano
+     Order by: Metric: Max num_focos
+     Order: Descending
+     Size: 30
+     Label: Anos
