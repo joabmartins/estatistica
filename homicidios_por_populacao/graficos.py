@@ -14,6 +14,10 @@ Densidade:
      Gráfico que representa uma distribuição suavisada da frequência dos dados
      - Eixo x (horiz): intervalos (classes) dos dados
      - Eixo y (vertc): frequência (contagem) de itens por intervalo
+Dispersão:
+     Gráfico que representa a relação entre dois conjunto de dados
+     - Eixos: Cada eixo representará um dos dois conjunto de dados
+     - Pontos: Cada ponto representa a interseção entre as variáveis de ambos os conjuntos.
 
 """
 # pip install matplotlib
