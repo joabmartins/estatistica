@@ -22,6 +22,7 @@ Dispersão:
 """
 # pip install matplotlib
 import matplotlib.pylab as plt
+import seaborn as sb
 import graficos
 import pandas as pd
 
@@ -68,11 +69,25 @@ def dispersao():
      plt.ylabel('Taxa de Homicídios')
      plt.title('Gráfico de Dispersão: Taxa de Homicídios vs. População')
      plt.grid(True) # Adiciona uma grade ao gráfico
+     # Mostrar o gráfico
+     plt.show()
 
-# Mostrar o gráfico
-plt.show()
+def correlacao():
+     correlacao = df_dados_brutos[['Populacao', 'Taxa homicidios']].corr()
+     plt.figure(figsize=(6,4))
+     # correlacao: a matriz a ser representada
+     # annot: mostrar ou não a legenda dos dados
+     # cmap: tema de cores (cool azul frio, warm vermelho quente)
+     # fmt: formatação dos números (.2f = 2 casa decimais)
+     # linewidths: espessura da linha entre as células
+     # sb.heatmap(correlacao, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
+     plt.imshow(correlacao, cmap='coolwarm', interpolation='nearest')
+     plt.colorbar()
+     plt.show()
+
 
 # histograma()
 # boxplot()
 # densidade()
-dispersao()
+# dispersao()
+correlacao()
