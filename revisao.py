@@ -105,6 +105,18 @@ plt.ylabel("Ocorrências")
 plt.title("Histograma")
 
 # Boxplot (explicar o boxplot especialmente quartis e os dados fora dos quartis)
+# 5, 20, 25, 30, 35, --- 40, 45, 50, 55, 100
+# Q2 = (35+40)/2=37.5 Q1 = 25 Q3 = 50
+# IQR = Q3 - Q1 = 50 - 25 = 25
+# LIMITE INFERIOR = Q1 - 1.5 * IQR = 25 - 1.5 * 25 = 25 - 37.5 = -12.5
+# LIMITE SUPERIOR = Q3 + 1.5 * IQR = 50 + 1.5 * 25 = 50 + 37.5 = 87.5
+# O valor 100 está acima do limite superior de 87.5. Portanto, ele seria plotado como um ponto individual (um outlier) no boxplot.
+# Os "bigodes" do boxplot iriam até o menor valor que não é outlier (5) e até o maior valor que não é outlier (55).
+# A caixa do boxplot representaria a faixa de notas entre 25 e 50, que é onde se concentram os 50% dos alunos que não tiraram a nota mínima ou a máxima extrema.
+#  dados = pd.DataFrame({'num': [5, 20, 25, 30, 35, 40, 45, 50, 55, 100]}).sort_values(by='num')
+#  plt.figure()
+#  sns.boxplot(data=dados)
+#  plt.show()
 plt.figure() # Cria a segunda figura (janela)
 sns.boxplot(data=serie_as_dataframe)
 plt.ylabel("variação percentual diária")
@@ -138,3 +150,6 @@ densidade.set_title("Densidade")
 # Ajusta o layout para evitar sobreposição
 plt.tight_layout()
 plt.show()
+
+
+# ensinar os alunos a apontar para outro remote (meu repo) e subir as alterações em uma branch com nome deles
