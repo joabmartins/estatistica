@@ -1,0 +1,50 @@
+{
+  "timestamp": "2025-07-25T17:25:45.448Z",
+  "systemData": {
+    "student": {
+      "name": "Estudante",
+      "id": "2024001",
+      "avatar": "👤"
+    },
+    "stages": {
+      "1": {
+        "completed": false,
+        "score": 0,
+        "data": {
+          "nomeEstudante": "",
+          "tituloPlano": "",
+          "observacoes": ""
+        }
+      },
+      "2": {
+        "completed": false,
+        "score": 0,
+        "data": {
+          "linhaTempo": "",
+          "dialogoTeoriaPratica": "",
+          "projecoesFuturo": "",
+          "referencias": ""
+        }
+      },
+      "3": {
+        "completed": false,
+        "score": 0,
+        "data": {
+          "ferramentaMapa": "",
+          "descricaoMapa": "",
+          "conexoes": "",
+          "caminhosTCC": ""
+        }
+      }
+    },
+    "currentStage": 4,
+    "totalScore": 0,
+    "lastSaved": "14:25:36"
+  },
+  "metadata": {
+    "version": "1.0",
+    "exportedBy": "Estudante",
+    "totalStages": 3,
+    "completedStages": 0
+  }
+}

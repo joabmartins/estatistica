@@ -1,13 +1,12 @@
+# pandas para criar a serie e usar quantile​
+import numpy as np
+import matplotlib.pylab as plt
+lista_idade = [5, 6, 8, 12, 20, 36, 68, 79, 95, 120, 135]
 
-import pandas as pd
+plt.boxplot(lista_idade, vert=False)
 
-lista_idade = [21, 21, 21, 22, 22, 22, 23, 23, 23, 23,
-              24, 24, 25, 25, 25, 26, 27, 27, 28, 28,
-              30, 30, 31, 31, 31]
-
-serie = pd.Series(lista_idade)
-
-quartis = [0.25, 0.5, 0.75]
-serie_quartis = serie.quantile(quartis)
-
-print(serie_quartis)
+P25 = np.quantile(lista_idade, 0.25)
+P50 = np.quantile(lista_idade, 0.50)
+P75 = np.quantile(lista_idade, 0.75)
+print(f'Q1: {P25}, Q2: {P50}, Q3: {P75}')
+plt.show()
