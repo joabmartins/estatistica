@@ -49,6 +49,28 @@ print(etfs_correlacionados.head(5))
 # Due to the large number of columns in this table, looking at the correlation matrix is cumbersome and it's more convenient to plot the correlation as a heatmap. 
 # The _seaborn_ package provides a convenient implementation for heatmaps.
 
+
+'''
+- vmin e vmax:
+Definem o valor mínimo e máximo para a escala de cores do seu mapa de calor.
+os valores variam de -1 (correlação negativa perfeita) a 1 (correlação positiva perfeita).
+O valor zero ficará exatamente no meio da escala.
+- cmap:
+é o argumento que determina a paleta de cores usada para colorir o mapa de calor.
+Em vez de usar um nome de paleta pré-definido (como 'viridis' ou 'coolwarm'), 
+você está usando a função sns.diverging_palette para criar uma paleta de cores personalizada.
+- sns.diverging_palette:
+Esta função é usada para gerar uma paleta de cores que "diverge". 
+Isso significa que ela começa com uma cor para valores negativos, passa por uma cor neutra para o zero, e termina com uma cor diferente para valores positivos. 
+É ideal para dados de correlação.
+- 20 e 220:
+São números que representam os "tons" (hues) no sistema de cores HSL (Hue, Saturation, Lightness).
+O número 20 corresponde a um tom alaranjado ou avermelhado, e o número 220 corresponde a um tom azulado. 
+- as_cmap=True:
+Este é um parâmetro booleano (verdadeiro/falso). Ele instrui a função diverging_palette a retornar a paleta de cores como um objeto de colormap do matplotlib, 
+que é o formato que a função sns.heatmap precisa para ser usado no argumento cmap.
+'''
+
 # fig, (telecomax, etfax) = plt.subplots(2, 1, figsize=(5, 10))
 fig, (telecomax, etfax) = plt.subplots(1, 2, figsize=(10, 5))
 telecomax = sns.heatmap(telecom.corr(), vmin=-1, vmax=1, 
@@ -62,6 +84,23 @@ plt.tight_layout()
 plt.show()
 
 '''
+T (AT&T), VZ (Verizon), CTL (na época CenturyLink) e FTR (Frontier)
+operavam principalmente no mercado de consumidores finais e pequenas empresas. Seus principais fluxos de receita vinham de:
+- Serviços de telefonia e internet residencial.
+- Planos de telefonia móvel.
+- Serviços de TV por assinatura.
+Isso significa que a performance dessas ações estava muito ligada a fatores como a competição no mercado de consumo, 
+o poder de compra das famílias e os ciclos econômicos que afetam diretamente o consumidor.
+
+Level 3 Communications (LVLT), era uma empresa de um nicho diferente. 
+Ela se concentrava em infraestrutura de rede de grande escala e serviços para grandes corporações. 
+Seu modelo de negócio era B2B (business-to-business), e ela vendia:
+- Redes de backbone: A infraestrutura principal da internet, usada por outras operadoras e grandes empresas.
+- Serviços de data center e soluções de nuvem para empresas.
+- Conectividade de alta capacidade para governos e multinacionais.
+A sua receita vinha de contratos de longo prazo com grandes clientes e estava mais atrelada ao crescimento do 
+tráfego global de dados e à demanda por serviços de infraestrutura corporativa
+
 (Exchange Traded Funds), que são fundos de investimento que replicam um índice
 ETFs de Renda Variável Tradicionais (Tecnologia, Setores, etc.):
   QQQ: Acompanha o índice Nasdaq-100, com forte concentração em empresas de tecnologia.
@@ -76,18 +115,20 @@ ETFs Defensivos (Acompanham Ouro, Petróleo, Volatilidade):
   VXX: Acompanha a volatilidade do mercado, usando opções do índice VIX. O VIX é popularmente conhecido como o "medidor do medo". 
   O VXX sobe quando o mercado está volátil e incerto, o que geralmente acontece quando as ações (como as de tecnologia) estão caindo.
 
-Correlação entre ETFs de Tecnologia e Defensivos:
-Procure a linha/coluna do GLD (ouro). 
-  Você verá que a maioria dos quadrados que cruzam com os ETFs de tecnologia (como QQQ, SPY, XLK) têm cores neutras (cinza) ou levesmente laranjas. 
-  Isso indica uma correlação fraca ou, em alguns casos, levemente negativa. Por quê? Porque quando a economia está indo bem e as empresas de tecnologia estão subindo, 
-  os investidores tendem a sair de ativos seguros como o ouro para buscar retornos mais altos. Quando a economia vai mal, eles fazem o movimento contrário, 
-  o que faz o ouro subir enquanto as ações de tecnologia caem.
-Procure a linha/coluna do VXX (volatilidade). 
-  Essa é a evidência mais forte. Você pode ver que o VXX tem uma correlação negativa clara (quadrados em laranja/vermelho) com quase todos os outros ETFs, 
-  especialmente os de tecnologia (QQQ, SPY, XLK). Isso é exatamente o que se espera: o VXX sobe (medo aumenta) quando o mercado de ações (e os ETFs de tecnologia) está caindo.
-Procure a linha/coluna do USO (petróleo). 
-  A correlação do USO com os outros ETFs parece ser mais fraca (cores neutras) ou até levemente negativa. 
-  O preço do petróleo é muito influenciado por fatores que nem sempre se alinham com o desempenho do setor de tecnologia.
+GLD
+A baixa correlação se dá porque o preço do ouro é influenciado por diversos fatores que não estão diretamente ligados ao desempenho das empresas de tecnologia, como:
+- Inflação: O ouro é um tradicional hedge contra a inflação, então seu preço tende a subir quando o poder de compra da moeda cai.
+- Força do Dólar Americano: Como o ouro é cotado em dólar, um dólar mais forte pode tornar o ouro mais caro para compradores internacionais, reduzindo a demanda.
+- Taxas de juros: Quando as taxas de juros sobem, o ouro (que não paga juros) se torna menos atrativo.
+
+USO
+O petróleo, tem ainda menos relação direta com o desempenho diário das empresas de tecnologia. Seu preço é movido principalmente por:
+Geopolítica: Guerras, sanções e decisões da OPEP (Organização dos Países Exportadores de Petróleo).
+Oferta e Demanda Global: O nível de produção de petróleo e a demanda de países industriais como China e EUA.
+Esses fatores são, em sua maioria, completamente independentes do que faz as ações da Apple ou da Microsoft subirem ou descerem.
+
+VXX 
+é um instrumento financeiro que, por definição, é inversamente correlacionado com o mercado.
 
 ETFs defensivos (GLD, VXX) são projetados para se comportar de maneira diferente dos ETFs tradicionais de ações (como QQQ e SPY), especialmente em momentos de incerteza econômica. 
 Eles são ferramentas de diversificação.
