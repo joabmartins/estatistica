@@ -1,0 +1,6 @@
+git branch estatistica_joab
+git checkout estatistica_joab
+git remote -v
+git remote add professor https://github.com/joabmartinsgmail/estatistica.git
+git push professor estatistica_joab
+git checkout main
