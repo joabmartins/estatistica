@@ -8,6 +8,17 @@ import matplotlib.pyplot as plt
 
 ## Multiple linear regression
 # importa o CSV e define uma lista de colunas (subset) do arquivo CSV 'data/house_sales.csv' que serão utilizadas para a análise.
+# Adjusted Sale Price: Preço ajustado da casa
+# Square foot to Living (area): área habitável em sq.ft. 1ft2 = 0,0929m2
+# bathrooms: banheiros
+# Bedrooms: quartos
+# Building grade
+'''
+Essa classificação é um fator importante para determinar o valor de um imóvel, 
+pois indica a qualidade dos materiais e da mão de obra utilizados na construção. 
+Geralmente, as classificações variam de uma letra ou número (como A, B, C ou de 1 a 5, por exemplo), 
+onde um grau mais alto representa uma construção de melhor qualidade.
+'''
 HOUSE_CSV = 'data/house_sales.csv'
 subset = ['AdjSalePrice', 'SqFtTotLiving', 'SqFtLot', 'Bathrooms', 
           'Bedrooms', 'BldgGrade']
@@ -17,9 +28,26 @@ print(house[subset].head())
 
 # As variáveis preditoras (SqFtTotLiving, SqFtLot, Bathrooms, Bedrooms, BldgGrade) 
 # e a variável alvo (AdjSalePrice) são definidas para o modelo de regressão.
+'''
+
+Isso acontece porque, na maioria das bibliotecas de machine learning, como o Scikit-learn, 
+o modelo de regressão linear (LinearRegression) espera que as variáveis preditoras (features) sejam fornecidas em uma estrutura de dados bidimensional, 
+enquanto a variável alvo (target) é esperada como uma estrutura unidimensional.
+- house[predictors], o código cria um novo DataFrame com apenas as colunas especificadas na lista predictors
+- house['AdjSalePrice'], o código seleciona apenas uma única coluna do DataFrame house. 
+Essa seleção resulta em uma Series, que é uma estrutura de dados unidimensional, exatamente o que o modelo espera como a variável alvo para prever.
+Em resumo:
+house[predictors] → cria um DataFrame (bidimensional) com as colunas de features.
+house['AdjSalePrice'] → cria uma Series (unidimensional) com a coluna de target.
+Essa é a convenção padrão para a maioria dos algoritmos de aprendizado de máquina, 
+onde as features (características) são uma matriz de dados, e o target (o que se quer prever) é um vetor de dados.
+'''
 predictors = ['SqFtTotLiving', 'SqFtLot', 'Bathrooms', 
               'Bedrooms', 'BldgGrade']
 outcome = 'AdjSalePrice'
+
+print(house[predictors].head())
+print(house[outcome].head())
 
 # Uma instância do modelo de regressão linear (LinearRegression) é criada e atribuída à variável house_lm.
 house_lm = LinearRegression()
@@ -36,15 +64,23 @@ Intercepto: O valor de **228.830$ é o intercepto do modelo.
 print(f'Intercept: {house_lm.intercept_:.3f}')
 '''
 Coeficientes:
-SqFtTotLiving: Para cada aumento de 1$ em SqFtTotLiving, AdjSalePrice aumenta em aproximadamente 218.83.
-SqFtLot: Para cada aumento de 1$ em SqFtLot, AdjSalePrice aumenta em aproximadamente 0.05.
-Bathrooms: Para cada aumento de 1$ em Bathrooms, AdjSalePrice aumenta em aproximadamente -1945. (Valor negativo)
-Bedrooms: Para cada aumento de 1$ em Bedrooms, AdjSalePrice aumenta em aproximadamente -4776. (Valor negativo)
-BldgGrade: Para cada aumento de 1$ em BldgGrade, AdjSalePrice aumenta em aproximadamente 106106.
+SqFtTotLiving: Para cada aumento de 1ft2 em SqFtTotLiving, AdjSalePrice aumenta em aproximadamente 218.83.
+SqFtLot: Para cada aumento de 1ft2 em SqFtLot, AdjSalePrice aumenta em aproximadamente 0.05.
+Bathrooms: Para cada aumento de 1 Bathrooms, AdjSalePrice aumenta em aproximadamente -1945. (Valor negativo)
+Bedrooms: Para cada aumento de 1 em Bedrooms, AdjSalePrice aumenta em aproximadamente -4776. (Valor negativo)
+BldgGrade: Para cada aumento de 1 grau em BldgGrade, AdjSalePrice aumenta em aproximadamente 106106.
 '''
 print('Coefficients:')
 for name, coef in zip(predictors, house_lm.coef_):
     print(f' {name}: {coef}')
+
+'''
+Esse resultado, onde o aumento de banheiros e quartos diminui o preço da casa, é contra-intuitivo e não reflete a lógica do mundo real. 
+Na maioria dos casos, o aumento desses itens tende a valorizar o imóvel.
+A causa mais provável para esse fenômeno no seu modelo é a multicolinearidade.
+A multicolinearidade ocorre quando duas ou mais variáveis preditoras em um modelo de regressão estão altamente correlacionadas entre si. 
+No seu caso, o número de banheiros e quartos pode estar altamente correlacionado com a variável SqFtTotLiving (área total habitável).
+'''
 
 ### Avaliar a Qualidade do modelo
 # _Scikit-learn_ provides a number of metrics to determine the quality of a model. Here we use the `r2_score`.
